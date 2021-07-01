@@ -15,25 +15,28 @@ class ViewController: UIViewController {
     @IBOutlet var offButton: UIButton!
     @IBOutlet var delButton: UIButton!
     
+    //각 이미지를 불러와서 상수에 설정
     let onImg = UIImage(named: "lamp-on.png")
     let offImg = UIImage(named: "lamp-off.png")
     let delImg = UIImage(named: "lamp-remove.png")
+    // 램프의 켜짐/꺼짐을 알려주는 시그널
     var isLampOn = true
     
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        // 첫 화면 로딩시 켜진 전구 출력
         imageView.image = onImg
         
     }
-
+    // 전구 켜기 누르는 액션
     @IBAction func turnOnAction(_ sender: UIButton) {
         if (isLampOn) {
-            let lampOnAlert = UIAlertController(title: "경고", message: "현재 On 상태입니다.", preferredStyle: UIAlertController.Style.alert)
-            let onAction = UIAlertAction(title: "네, 알겠습니다.", style: UIAlertAction.Style.default, handler: nil)
+            let lampOnAlert = UIAlertController(title: "경고", message: "현재 On 상태입니다.", preferredStyle: UIAlertController.Style.alert) // 이미 켜진 전구는 Alert생성하여 경고
+            let onAction = UIAlertAction(title: "네, 알겠습니다.", style: UIAlertAction.Style.default, handler: nil) // alert에 버튼 클릭시 액션 정의
             
-            lampOnAlert.addAction(onAction)
+            lampOnAlert.addAction(onAction) // 액션 추가
             present(lampOnAlert, animated: true, completion: nil)
         } else {
             imageView.image = onImg
@@ -43,7 +46,7 @@ class ViewController: UIViewController {
     
     @IBAction func turnOffAction(_ sender: UIButton) {
         if (isLampOn == false) {
-            let lampOnAlert = UIAlertController(title: "경고", message: "현재 Off 상태입니다.", preferredStyle: UIAlertController.Style.alert)
+            let lampOnAlert = UIAlertController(title: "경고", message: "현재 Off 상태입니다.", preferredStyle: UIAlertController.Style.alert) // 이미 꺼진 전구는 경고
             let onAction = UIAlertAction(title: "네, 알겠습니다.", style: UIAlertAction.Style.default, handler: nil)
             
             lampOnAlert.addAction(onAction)
@@ -64,11 +67,11 @@ class ViewController: UIViewController {
         }
     }
     
-    
+    // 전구 제거 경고
     @IBAction func deleteAction(_ sender: UIButton) {
         let lampDelAlert = UIAlertController(title: "램프제거", message: "램프를 제거하시겠습니까 ?", preferredStyle: UIAlertController.Style.alert)
         
-        let offAction = UIAlertAction(title: "아니요, 끕니다(Off)", style: UIAlertAction.Style.default, handler: {
+        let offAction = UIAlertAction(title: "아니요, 끕니다(Off)", style: UIAlertAction.Style.default, handler: { // 3가지 경고창 모두 내장 함수로 내부에 handler 구현(클로저) 내부에서 변수 사용할 때 self. 붙여야 함.
             Action in self.imageView.image = self.offImg
             self.isLampOn = false
         })
