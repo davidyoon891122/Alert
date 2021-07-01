@@ -28,6 +28,45 @@ class ViewController: UIViewController {
         
     }
 
-
+    @IBAction func turnOnAction(_ sender: UIButton) {
+        if (isLampOn) {
+            let lampOnAlert = UIAlertController(title: "경고", message: "현재 On 상태입니다.", preferredStyle: UIAlertController.Style.alert)
+            let onAction = UIAlertAction(title: "네, 알겠습니다.", style: UIAlertAction.Style.default, handler: nil)
+            
+            lampOnAlert.addAction(onAction)
+            present(lampOnAlert, animated: true, completion: nil)
+        } else {
+            imageView.image = onImg
+            isLampOn = true
+        }
+    }
+    
+    @IBAction func turnOffAction(_ sender: UIButton) {
+        if (isLampOn == false) {
+            let lampOnAlert = UIAlertController(title: "경고", message: "현재 Off 상태입니다.", preferredStyle: UIAlertController.Style.alert)
+            let onAction = UIAlertAction(title: "네, 알겠습니다.", style: UIAlertAction.Style.default, handler: nil)
+            
+            lampOnAlert.addAction(onAction)
+            present(lampOnAlert, animated: true, completion: nil)
+        } else {
+            let lampOffAlert = UIAlertController(title: "램프 끄기", message: "램프를 끄시겠습니까?", preferredStyle: UIAlertController.Style.alert)
+            let offAction = UIAlertAction(title: "네", style: UIAlertAction.Style.default, handler: {
+                ACTION in self.imageView.image = self.offImg
+                self.isLampOn = false
+            })
+            let cancelAction = UIAlertAction(title: "아니요", style: UIAlertAction.Style.cancel, handler: nil)
+            
+            lampOffAlert.addAction(offAction)
+            lampOffAlert.addAction(cancelAction)
+            
+            present(lampOffAlert, animated: true, completion: nil)
+            
+        }
+    }
+    
+    
+    @IBAction func deleteAction(_ sender: UIButton) {
+    }
+    
 }
 
